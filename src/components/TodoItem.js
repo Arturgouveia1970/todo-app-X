@@ -9,7 +9,17 @@ class TodoItem extends React.Component {
   handleEditing = () => {
     this.setState({
       editing: true,
-    });
+    })
+  }
+
+  handleUpdatedDone = event => {
+    if (event.key === 'Enter') {
+      this.setState({ editing: false })
+    }
+  }
+
+  componentWillUnmount() {
+    console.log("Cleaning up...")
   }
 
   render() {
@@ -21,8 +31,8 @@ class TodoItem extends React.Component {
     };
 
     const { completed, id, title } = this.props.todo;
-    const viewMode = {};
-    const editMode = {};
+    let viewMode = {};
+    let editMode = {};
 
     if (this.state.editing) {
       viewMode.display = 'none';
@@ -32,25 +42,30 @@ class TodoItem extends React.Component {
 
     return (
       <li className={styles.item}>
-        <div onDoubleClick={this.handleEditing} style={viewmode}>
+        <div onDoubleClick={this.handleEditing} style={viewMode}>
           <input
             type="checkbox"
             className={styles.checkbox}
             checked={completed}
             onChange={() => this.props.handleChangeProps(id)}
           />
-          <button onClick={() => this.props.deleteTodoProps(id)}>Delete</button>
+          <button onClick={() => this.props.deleteTodoProps(id)}>
+            Delete
+          </button>
           <span style={completed ? completedStyle : null}>{title}</span>
         </div>
         <input
           type="text"
-          style={editmode}
+          style={editMode}
           className={styles.textInput}
           value={title}
-          onChange={(e) => { this.props.setUpdate(e.target.value, id); }}
+          onChange={(e) => {
+           this.props.setUpdate(e.target.value, id)
+          }}
+          onKeyDown={this.handleUpdatedDone}
         />
       </li>
-    );
+    )
   }
 }
 
