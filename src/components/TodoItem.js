@@ -50,7 +50,7 @@ class TodoItem extends React.Component {
           onChange={(e) => { this.props.setUpdate(e.target.value, id); }}
         />
       </li>
-    )
+    );
   }
 }
 
