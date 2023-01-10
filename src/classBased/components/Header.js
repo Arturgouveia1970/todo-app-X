@@ -13,7 +13,7 @@ const Header = () => {
           fontSize: '6rem',
           fontWeight: '600',
           marginBottom: '2rem',
-          lineHeight: '1em',
+          lineHeight: '2em',
           color: '#ececec',
           textTransform: 'lowercase',
           textAlign: 'center',
